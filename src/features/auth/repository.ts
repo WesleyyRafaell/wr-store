@@ -1,15 +1,16 @@
-import { generateToken } from "@/utils/storage";
-import { UserModel } from "./model";
-import Cookies from "js-cookie";
+import { generateToken, getUser, saveAuthToken, saveUser } from "@/utils/storage";
+import { LoginModel, UserModel } from "./model";
 
 export interface IAuthRepository {
   signUp({
     email,
     name,
     password,
-  }: UserModel): Promise<
-    { success: true; user: UserModel | null } | { success: false; error: string }
-  >;
+  }: UserModel): Promise<{ success: true } | { success: false; error: string }>;
+  signIn({
+    email,
+    password,
+  }: LoginModel): Promise<{ success: true } | { success: false; error: string }>;
 }
 
 export const AuthRepository: IAuthRepository = {
@@ -25,10 +26,33 @@ export const AuthRepository: IAuthRepository = {
 
       const token = generateToken();
 
-      Cookies.set("user_data", JSON.stringify(userData), { expires: 7 });
-      Cookies.set("auth_token", token, { expires: 7 });
+      saveUser(userData);
+      saveAuthToken(token);
 
-      return { success: true, user: response.user };
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: "Failed to sign up" };
+    }
+  },
+  async signIn({ email, password }: LoginModel) {
+    try {
+      const response = await new Promise<{ user: LoginModel | null }>((resolve) =>
+        setTimeout(() => resolve({ user: { email, password } }), 1000)
+      );
+
+      if (!response.user) return { success: false, error: "No user returned" };
+
+      const userFromStorage = getUser();
+
+      if (email !== userFromStorage?.email || password !== userFromStorage?.password) {
+        return { success: false, error: "Invalid credentials" };
+      }
+
+      const token = generateToken();
+
+      saveAuthToken(token);
+
+      return { success: true };
     } catch (error) {
       return { success: false, error: "Failed to sign up" };
     }
