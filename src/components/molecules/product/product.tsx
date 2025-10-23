@@ -1,9 +1,23 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { isLoggedIn } from "@/utils/storage";
 import Image from "next/image";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export const Product = () => {
+  const userIsLoggedIn = isLoggedIn();
+
+  const addToCart = () => {
+    if (!userIsLoggedIn) {
+      toast.error("Você precisa estar logado para adicionar itens ao carrinho.");
+      return;
+    }
+
+    // Lógica para adicionar o produto ao carrinho
+  };
+
   return (
     <Card className="w-full max-w-3xs">
       <CardHeader className="flex justify-center">
@@ -19,7 +33,7 @@ export const Product = () => {
           <p className="font-bold text-lg text-primary">R$ 1.299,00</p>
         </div>
         <div className="pt-1.5">
-          <Button className="w-full cursor-pointer" variant="secondary">
+          <Button onClick={addToCart} className="w-full cursor-pointer" variant="secondary">
             <MdOutlineShoppingCart size={25} />
             Adicionar ao carrinho
           </Button>

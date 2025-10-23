@@ -8,9 +8,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signInSchema, signInTypeSchema } from "./schema";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 export const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -21,7 +24,9 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: signInTypeSchema) => {
+    setLoading(true);
     const result = await loginAction(data);
+    setLoading(false);
 
     if (!result.success) {
       toast.error(result?.error);
@@ -48,8 +53,9 @@ export const LoginForm = () => {
         </Field>
 
         <Field orientation="horizontal">
-          <Button type="submit" className="w-full cursor-pointer">
-            Logar
+          <Button disabled={loading} type="submit" className="w-full cursor-pointer">
+            {loading ? <Spinner /> : null}
+            {!loading ? "Logar" : null}
           </Button>
         </Field>
       </FieldGroup>

@@ -8,9 +8,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signUpSchema, signUpTypeSchema } from "./schema";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 export const RegisterForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -21,7 +24,9 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: signUpTypeSchema) => {
+    setLoading(true);
     const result = await registerAction(data);
+    setLoading(false);
 
     if (!result.success) {
       toast.error(result?.error);
@@ -89,8 +94,14 @@ export const RegisterForm = () => {
         </div>
 
         <Field orientation="horizontal">
-          <Button type="submit" variant="secondary" className="w-full cursor-pointer">
-            Cadastrar
+          <Button
+            disabled={loading}
+            type="submit"
+            variant="secondary"
+            className="w-full cursor-pointer"
+          >
+            {loading ? <Spinner /> : null}
+            {!loading ? "Cadastrar" : null}
           </Button>
         </Field>
       </FieldGroup>

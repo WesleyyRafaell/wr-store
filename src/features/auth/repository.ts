@@ -45,7 +45,7 @@ export const AuthRepository: IAuthRepository = {
       const userFromStorage = getUser();
 
       if (email !== userFromStorage?.email || password !== userFromStorage?.password) {
-        return { success: false, error: "Invalid credentials" };
+        return { success: false, error: "Credenciais inválidas" };
       }
 
       const token = generateToken();

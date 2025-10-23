@@ -27,6 +27,11 @@ export const saveAuthToken = (token: string) => {
   });
 };
 
+export const isLoggedIn = () => {
+  const token = Cookies.get(AUTH_TOKEN_KEY);
+  return !!token;
+};
+
 export const removeAuthToken = () => {
   Cookies.remove(AUTH_TOKEN_KEY);
 };
