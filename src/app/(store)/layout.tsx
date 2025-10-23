@@ -10,8 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { useProductsStore } from "@/store/products";
 
 export default function PrivateLayout({ children }: { children: React.ReactNode }) {
+  const { products } = useProductsStore();
   const userIsLoggedIn = isLoggedIn();
 
   const router = useRouter();
@@ -29,12 +31,14 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
         {userIsLoggedIn ? (
           <div className="flex gap-8 items-center">
             <div className="relative">
-              <Badge
-                variant="secondary"
-                className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums absolute -top-2 -right-3.5"
-              >
-                8
-              </Badge>
+              {products.length ? (
+                <Badge
+                  variant="secondary"
+                  className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums absolute -top-2 -right-3.5"
+                >
+                  {products.length}
+                </Badge>
+              ) : null}
               <MdOutlineShoppingCart
                 className="text-white cursor-pointer hover:text-secondary transition-all"
                 size={25}
