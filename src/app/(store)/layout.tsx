@@ -27,7 +27,9 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
   return (
     <>
       <div className="bg-primary px-10 py-3.5 flex items-center justify-between">
-        <Logo />
+        <Link href="/home">
+          <Logo />
+        </Link>
         {userIsLoggedIn ? (
           <div className="flex gap-8 items-center">
             <div className="relative">
@@ -39,10 +41,12 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
                   {products.length}
                 </Badge>
               ) : null}
-              <MdOutlineShoppingCart
-                className="text-white cursor-pointer hover:text-secondary transition-all"
-                size={25}
-              />
+              <Link href="/cart">
+                <MdOutlineShoppingCart
+                  className="text-white cursor-pointer hover:text-secondary transition-all"
+                  size={25}
+                />
+              </Link>
             </div>
 
             <div onClick={handleLogout}>

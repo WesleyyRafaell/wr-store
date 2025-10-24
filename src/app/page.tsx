@@ -1,5 +1,5 @@
-import AuthPage from "./auth/page";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <AuthPage />;
+export default function HomePage() {
+  redirect("/home");
 }
