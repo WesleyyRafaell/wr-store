@@ -5,7 +5,6 @@ import { persist } from "zustand/middleware";
 interface ProductsState {
   products: IProducts[] | [];
   setProducts: (products: IProducts[]) => void;
-  // clearUser: () => void;
 }
 
 export const useProductsStore = create<ProductsState>()(
@@ -14,8 +13,6 @@ export const useProductsStore = create<ProductsState>()(
       products: [],
 
       setProducts: (products) => set({ products }),
-
-      // clearUser: () => set({ user: null }),
     }),
     {
       name: "user-storage",

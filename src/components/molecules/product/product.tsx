@@ -8,9 +8,37 @@ import Image from "next/image";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { toast } from "react-toastify";
 
-export const Product = ({ title, description, price, oldPrice, imageUrl }: IProducts) => {
+export const Product = ({
+  title,
+  description,
+  price,
+  oldPrice,
+  imageUrl,
+  id,
+  quantity,
+}: IProducts) => {
   const { setProducts, products } = useProductsStore();
   const userIsLoggedIn = isLoggedIn();
+
+  const increaseProductQuantity = () => {
+    const newProducts = products.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+
+    return newProducts;
+  };
+
+  const addNewProduct = () => {
+    const newProducts = [
+      ...products,
+      { id, quantity, title, description, price, oldPrice, imageUrl },
+    ];
+
+    return newProducts;
+  };
 
   const addToCart = () => {
     if (!userIsLoggedIn) {
@@ -18,7 +46,10 @@ export const Product = ({ title, description, price, oldPrice, imageUrl }: IProd
       return;
     }
 
-    const newProducts = [...products, { title, description, price, oldPrice, imageUrl }];
+    const productExists = products.find((product) => product.id === id);
+
+    const newProducts = productExists ? increaseProductQuantity() : addNewProduct();
+
     setProducts(newProducts);
     toast.success("Produto adicionado ao carrinho com sucesso!");
   };

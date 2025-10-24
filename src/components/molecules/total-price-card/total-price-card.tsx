@@ -24,7 +24,7 @@ export const TotalPriceCard = () => {
       <div className="flex flex-col items-center gap-2.5">
         <Button className="cursor-pointer w-full">Continuar</Button>
         <Link href="/home">
-          <p className="text-gray-500 underline">Adicionar mais produtos</p>
+          <p className="text-gray-500 underline text-sm">Adicionar mais produtos</p>
         </Link>
       </div>
     </Card>
