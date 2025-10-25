@@ -66,7 +66,7 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
           </Link>
         ) : null}
       </div>
-      <div className="px-10">{children}</div>
+      <div className="px-10 pb-10">{children}</div>
     </>
   );
 }

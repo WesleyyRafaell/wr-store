@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { IProducts } from "@/features/products/model";
 import { useProductsStore } from "@/store/products";
+import { formatCurrency } from "@/utils/currency";
 import { isLoggedIn } from "@/utils/storage";
 import Image from "next/image";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -59,13 +60,13 @@ export const Product = ({
       <CardHeader className="flex justify-center">
         <Image src={imageUrl} width={200} height={200} alt="Picture of the author" />
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col flex-1">
         <p className="font-bold text-sm line-clamp-2 text-gray-800">{title}</p>
         <div className="py-2">
-          <p className="text-sm line-through">R$ {oldPrice.toFixed(2)}</p>
-          <p className="font-bold text-lg text-primary">R$ {price.toFixed(2)}</p>
+          {oldPrice > 0 ? <p className="text-sm line-through">{formatCurrency(oldPrice)}</p> : null}
+          <p className="font-bold text-lg text-primary">{formatCurrency(price)}</p>
         </div>
-        <div className="pt-1.5">
+        <div className="pt-1.5 flex flex-1 items-end">
           <Button onClick={addToCart} className="w-full cursor-pointer" variant="secondary">
             <MdOutlineShoppingCart size={25} />
             Adicionar ao carrinho

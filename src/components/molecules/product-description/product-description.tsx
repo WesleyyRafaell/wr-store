@@ -2,6 +2,7 @@ import { NumberStepper } from "@/components/molecules";
 import { Card } from "@/components/ui/card";
 import { IProducts } from "@/features/products/model";
 import { useProductsStore } from "@/store/products";
+import { formatCurrency } from "@/utils/currency";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 
@@ -38,8 +39,10 @@ export const ProductDescription = ({
         <div className="flex flex-col gap-4 max-w-2xs">
           <p className="text-gray-600 text-sm">Preço</p>
           <div>
-            <p className="text-sm line-through">{oldPrice}</p>
-            <p className="font-bold text-base text-primary">{price}</p>
+            {oldPrice > 0 ? (
+              <p className="text-sm line-through">{formatCurrency(oldPrice * quantity)}</p>
+            ) : null}
+            <p className="font-bold text-base text-primary">{formatCurrency(price * quantity)}</p>
           </div>
         </div>
         <div className="flex flex-1 justify-end items-center">
