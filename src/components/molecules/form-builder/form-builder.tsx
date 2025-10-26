@@ -27,6 +27,7 @@ interface FieldConfig<T extends FieldValues> {
   width?: "full" | "half";
   placeholder?: string;
   options?: { label: string; value: string }[];
+  change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface FormBuilderProps<T extends FieldValues> {
@@ -59,6 +60,7 @@ export function FormBuilder<T extends FieldValues>({
               id={String(field.name)}
               placeholder={field.placeholder}
               type="text"
+              onChange={field.change}
             />
           )}
 

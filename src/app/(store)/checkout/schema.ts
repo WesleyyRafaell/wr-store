@@ -1,3 +1,4 @@
+import { onlyDigits } from "@/utils/masks";
 import { z } from "zod";
 
 export const checkoutSchema = z
@@ -7,16 +8,19 @@ export const checkoutSchema = z
     cpf: z
       .string()
       .min(11, "CPF inválido")
-      .regex(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido"),
+      .regex(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido")
+      .transform((val) => onlyDigits(val)),
     phone: z
       .string()
       .min(8, "Celular obrigatório")
-      .regex(/^[0-9()+\-\s]+$/, "Celular inválido"),
+      .regex(/^[0-9()+\-\s]+$/, "Celular inválido")
+      .transform((val) => onlyDigits(val)),
 
     cep: z
       .string()
       .min(8, "CEP inválido")
-      .regex(/^\d{5}-?\d{3}$/, "CEP inválido"),
+      .regex(/^\d{5}-?\d{3}$/, "CEP inválido")
+      .transform((val) => onlyDigits(val)),
     address: z.string().min(3, "Endereço obrigatório"),
     number: z.string().min(1, "Número obrigatório"),
     neighborhood: z.string().min(2, "Bairro obrigatório"),
@@ -40,7 +44,7 @@ export const checkoutSchema = z
   })
   .superRefine((data, ctx) => {
     if (data.paymentMethod === "creditcard") {
-      if (!data.cardNumber || data.cardNumber.trim().length < 16) {
+      if (!data.cardNumber || onlyDigits(data.cardNumber).length < 16) {
         ctx.addIssue({
           code: "custom",
           path: ["cardNumber"],

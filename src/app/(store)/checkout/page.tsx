@@ -17,6 +17,7 @@ import { BoxWithTitle, FormBuilder, TotalPriceCard } from "@/components/molecule
 import { redirect } from "next/navigation";
 import { isObjectNotEmpty } from "@/utils/object";
 import { toast } from "react-toastify";
+import { formatCard, formatCEP, formatCPF, formatPhone } from "@/utils/masks";
 
 const Checkout = () => {
   const user = getUser();
@@ -26,6 +27,7 @@ const Checkout = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     watch,
     formState: { errors },
@@ -74,6 +76,21 @@ const Checkout = () => {
     }
   }, [errors]);
 
+  const handleCPFChange = (e: React.ChangeEvent<HTMLInputElement>, field: "cpf" | "cardCpf") => {
+    const formatted = formatCPF(e.target.value);
+    setValue(field, formatted);
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value);
+    setValue("phone", formatted);
+  };
+
+  const onChangeCEP = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCEP(e.target.value);
+    setValue("cep", formatted, { shouldValidate: false, shouldDirty: true });
+  };
+
   return (
     <div className="pt-7">
       <h1 className="text-lg font-bold text-primary">Finalizar a compra</h1>
@@ -106,8 +123,22 @@ const Checkout = () => {
                           width: "half",
                         },
                         { name: "lastname", label: "Sobrenome", type: "input", width: "half" },
-                        { name: "cpf", label: "CPF", type: "input", width: "half" },
-                        { name: "phone", label: "Celular", type: "input", width: "half" },
+                        {
+                          name: "cpf",
+                          label: "CPF",
+                          type: "input",
+                          width: "half",
+                          change: (e) => handleCPFChange(e, "cpf"),
+                          placeholder: "000.000.000-00",
+                        },
+                        {
+                          name: "phone",
+                          label: "Celular",
+                          type: "input",
+                          width: "half",
+                          change: handlePhoneChange,
+                          placeholder: "(98) 989101285",
+                        },
                       ]}
                       control={control}
                       register={register}
@@ -143,6 +174,8 @@ const Checkout = () => {
                           label: "Cep",
                           type: "input",
                           width: "half",
+                          change: onChangeCEP,
+                          placeholder: "00000-000",
                         },
                         { name: "address", label: "Endereço", type: "input", width: "half" },
                         { name: "number", label: "Número", type: "input", width: "half" },
@@ -224,6 +257,7 @@ const Checkout = () => {
                               name: "cardNumber",
                               label: "Número do cartão",
                               type: "input",
+                              change: (e) => setValue("cardNumber", formatCard(e.target.value)),
                             },
                             {
                               name: "installments",
@@ -259,6 +293,8 @@ const Checkout = () => {
                               label: "CPF do titular",
                               type: "input",
                               width: "half",
+                              change: (e) => handleCPFChange(e, "cardCpf"),
+                              placeholder: "000.000.000-00",
                             },
                           ]}
                           control={control}
