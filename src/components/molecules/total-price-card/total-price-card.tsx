@@ -1,13 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useProductsStore } from "@/store/products";
 import { formatCurrency } from "@/utils/currency";
 
 import Link from "next/link";
 
-export const TotalPriceCard = () => {
+interface ITotalPriceCardProps {
+  children: React.ReactNode;
+}
+
+export const TotalPriceCard = ({ children }: ITotalPriceCardProps) => {
   const { products } = useProductsStore();
 
   const total = products.reduce((acc, product) => {
@@ -35,7 +38,7 @@ export const TotalPriceCard = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2.5">
-        <Button className="cursor-pointer w-full">Continuar</Button>
+        {children}
         <Link href="/home">
           <p className="text-gray-500 underline text-sm">Adicionar mais produtos</p>
         </Link>

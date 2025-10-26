@@ -1,6 +1,7 @@
 "use client";
 
 import { ProductDescription, TotalPriceCard } from "@/components/molecules";
+import { Button } from "@/components/ui/button";
 import { useProductsStore } from "@/store/products";
 import Link from "next/link";
 import { FaSadCry } from "react-icons/fa";
@@ -20,7 +21,11 @@ const Cart = () => {
             </div>
           </div>
           <div className="w-1/4">
-            <TotalPriceCard />
+            <TotalPriceCard>
+              <Link href="checkout" className="w-full">
+                <Button className="cursor-pointer w-full">Continuar</Button>
+              </Link>
+            </TotalPriceCard>
           </div>
         </div>
       ) : null}
