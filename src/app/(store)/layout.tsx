@@ -20,13 +20,14 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
 
   const handleLogout = () => {
     removeAuthToken();
+    localStorage.removeItem("products-storage");
     router.push("/auth");
     toast.success("Logout realizado com sucesso!");
   };
 
   return (
     <>
-      <div className="bg-primary px-10 py-3.5 flex items-center justify-between">
+      <div className="bg-primary px-10 py-3.5 flex flex-col md:flex-row gap-3 items-center justify-between">
         <Link href="/home">
           <Logo />
         </Link>

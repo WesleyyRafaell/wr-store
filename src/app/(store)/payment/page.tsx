@@ -18,22 +18,22 @@ const Payment = () => {
 
   return (
     <div className="pt-7 flex flex-col items-center gap-7">
-      <Card className="w-2xl">
-        <div className="flex flex-col items-center gap-2">
+      <Card className="w-full md:w-2xl">
+        <div className="flex flex-col items-center text-center gap-2">
           <p className="text-sm text-gray-600">Falta pouco!</p>
           <p className="text-lg font-bold">Pague R$ 6.528,08 via Pix para concluir sua compra</p>
         </div>
       </Card>
       <RenderCondition condition={paymentType === "ticket"}>
-        <Card className="w-2xl">
-          <div className="px-4">
+        <Card className="w-full md:w-2xl">
+          <div className="px-4 text-center md:text-start">
             <p className="text-lg font-bold">Instruções de pagamento</p>
             <p className="text-gray-700 text-sm mt-2">
               Para pagar pelo Internet Banking, copie a linha digitável ou escaneie o código de
               barras. Para pagar em qualquer banco, caixa eletrônico ou lotérica, por favor, imprima
               o boleto.
             </p>
-            <div className="flex items-center gap-1 mt-4">
+            <div className="flex flex-col md:flex-row items-center gap-1 mt-4">
               <IoIosTimer className="text-gray-600 text-lg" />
               <p className="text-sm">
                 Aprovação em 1 ou 2 dias úteis. Os pagamentos feitos nos fins de semana ou feriados
@@ -55,8 +55,8 @@ const Payment = () => {
         </Card>
       </RenderCondition>
       <RenderCondition condition={paymentType === "pix"}>
-        <Card className="w-2xl">
-          <div className="px-4">
+        <Card className="w-full md:w-2xl">
+          <div className="px-4 text-center md:text-start">
             <p className="text-lg font-bold">Escaneie um código QR para pagar</p>
             <div className="flex flex-col gap-1 px-1.5">
               <p>1. Acesse seu Internet Banking ou app de pagamentos</p>
@@ -66,7 +66,7 @@ const Payment = () => {
             <div className="flex justify-center py-5">
               <Image src="/codigqr.png" alt="codigo qr" width={150} height={150} />
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-center md:justify-start gap-1">
               <IoIosTimer className="text-gray-600" />
               <p className="text-sm text-gray-600">Pague e será créditado na hora.</p>
             </div>

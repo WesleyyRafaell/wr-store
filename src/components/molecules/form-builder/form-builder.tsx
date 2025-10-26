@@ -47,7 +47,10 @@ export function FormBuilder<T extends FieldValues>({
   return (
     <div className={`flex items-center flex-wrap gap-4 justify-between ${className ?? ""}`}>
       {fields.map((field) => (
-        <Field key={String(field.name)} className={field?.width === "half" ? "w-9/20" : "w-full"}>
+        <Field
+          key={String(field.name)}
+          className={field?.width === "half" ? "w-full md:w-9/20" : "w-full"}
+        >
           <FieldLabel htmlFor={String(field.name)}>{field.label}</FieldLabel>
 
           {field.type === "input" && (

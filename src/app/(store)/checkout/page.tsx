@@ -78,8 +78,8 @@ const Checkout = () => {
     <div className="pt-7">
       <h1 className="text-lg font-bold text-primary">Finalizar a compra</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex justify-between pt-6">
-          <div className="w-1/2 flex flex-col gap-6">
+        <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-0 justify-between pt-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
             <BoxWithTitle
               hasEdit={tabs !== 1}
               pressEdit={() => changeTabs(1)}
@@ -271,14 +271,18 @@ const Checkout = () => {
                     <RenderCondition condition={watch("paymentMethod") === "pix"}>
                       <div className="flex flex-col items-center gap-6">
                         <Image src="/pixlogo.png" alt="logo pix" width={200} height={90} />
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2">
+                        <div className="flex flex-col gap-7 md:1.5">
+                          <div className="flex flex-col md:flex-row items-center gap-2">
                             <Badge>1</Badge>
-                            <p>Aperte em Finalizar compra para gerar o código QR</p>
+                            <p className="text-center md:text-start">
+                              Aperte em Finalizar compra para gerar o código QR
+                            </p>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-col md:flex-row items-center gap-2">
                             <Badge>2</Badge>
-                            <p>Confira os dados e realize o pagamento pelo app do seu banco</p>
+                            <p className="text-center md:text-start">
+                              Confira os dados e realize o pagamento pelo app do seu banco
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -287,14 +291,18 @@ const Checkout = () => {
                     <RenderCondition condition={watch("paymentMethod") === "ticket"}>
                       <div className="flex flex-col items-center gap-6">
                         <Image src="/boletologo.png" alt="logo boleto" width={200} height={90} />
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2">
+                        <div className="flex flex-col gap-7 md:1.5">
+                          <div className="flex flex-col md:flex-row items-center gap-2">
                             <Badge>1</Badge>
-                            <p>Aperte em Finalizar compra para gerar o código QR</p>
+                            <p className="text-center md:text-start">
+                              Aperte em Finalizar compra para gerar o código QR
+                            </p>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-col md:flex-row items-center gap-2">
                             <Badge>2</Badge>
-                            <p>Confira os dados e realize o pagamento pelo app do seu banco</p>
+                            <p className="text-center md:text-start">
+                              Confira os dados e realize o pagamento pelo app do seu banco
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -304,7 +312,7 @@ const Checkout = () => {
               </RenderCondition>
             </BoxWithTitle>
           </div>
-          <div className="w-2/5">
+          <div className="w-full md:w-2/5">
             <TotalPriceCard>
               <Button type="submit" className="cursor-pointer w-full">
                 Continuar

@@ -12,15 +12,15 @@ const Cart = () => {
   return (
     <div className="pt-7">
       {products?.length ? (
-        <div className="flex justify-between">
-          <div className="w-2/3">
+        <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-0 justify-between">
+          <div className="w-full md:w-2/3">
             <div className="flex flex-col gap-5">
               {products.map((product) => (
                 <ProductDescription key={product.id} {...product} />
               ))}
             </div>
           </div>
-          <div className="w-1/4">
+          <div className="w-full md:w-1/4">
             <TotalPriceCard>
               <Link href="checkout" className="w-full">
                 <Button className="cursor-pointer w-full">Continuar</Button>

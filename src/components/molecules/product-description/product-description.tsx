@@ -23,20 +23,20 @@ export const ProductDescription = ({
 
   return (
     <Card className="px-10">
-      <div className="flex gap-7">
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-7">
+        <div className="flex flex-col gap-4 text-center md:text-start">
           <p className="text-gray-600 text-sm">Produto</p>
           <Image src={imageUrl} width={100} height={100} alt="Produto" />
         </div>
-        <div className="flex flex-col gap-4 max-w-2xs">
+        <div className="flex flex-col gap-4 text-center md:text-start max-w-2xs">
           <p className="text-gray-600 text-sm">Descrição</p>
           <p className="font-bold text-sm">{description}</p>
         </div>
-        <div className="flex flex-col gap-4 max-w-2xs">
+        <div className="flex flex-col gap-4 text-center md:text-start max-w-2xs">
           <p className="text-gray-600 text-sm">Quantidade</p>
           <NumberStepper productQuantity={quantity} id={id} />
         </div>
-        <div className="flex flex-col gap-4 max-w-2xs">
+        <div className="flex flex-col gap-4 text-center md:text-start max-w-2xs">
           <p className="text-gray-600 text-sm">Preço</p>
           <div>
             {oldPrice > 0 ? (

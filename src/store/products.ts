@@ -15,7 +15,7 @@ export const useProductsStore = create<ProductsState>()(
       setProducts: (products) => set({ products }),
     }),
     {
-      name: "user-storage",
+      name: "products-storage",
     }
   )
 );

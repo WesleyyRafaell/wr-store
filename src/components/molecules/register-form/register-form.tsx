@@ -40,7 +40,7 @@ export const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="pt-5">
       <FieldGroup>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Field>
             <FieldLabel className="text-white" htmlFor="checkout-7j9-card-name-43j">
               Nome
@@ -61,7 +61,7 @@ export const RegisterForm = () => {
             {errors.email && <p className="text-xs text-orange-500">{errors.email.message}</p>}
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Field>
             <FieldLabel className="text-white" htmlFor="checkout-7j9-card-name-43j-senha">
               Senha

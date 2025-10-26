@@ -21,9 +21,9 @@ const OrderStatus = () => {
 
   return (
     <div className="pt-7">
-      <h1 className="text-lg font-bold text-primary">Status do pedido</h1>
+      <h1 className="text-lg font-bold text-primary text-center md:text-start">Status do pedido</h1>
       <div className="pt-11 flex justify-center">
-        <div className="flex items-center">
+        <div className="flex flex-col md:flex-row items-center gap-5 md:gap-0">
           {orderList.map((item, index) => (
             <OrderStatusList
               key={item.title}
