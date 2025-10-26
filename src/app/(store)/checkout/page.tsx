@@ -61,6 +61,10 @@ const Checkout = () => {
     console.log("data:", data);
     // realizar manipulação com dados coletados aqui
 
+    if (watch("paymentMethod") === "creditcard") {
+      redirect(`/orderstatus?payment_type=creditcard`);
+    }
+
     redirect(`/payment?payment_type=${watch("paymentMethod")}`);
   };
 

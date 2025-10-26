@@ -6,3 +6,4 @@ export { ProductDescription } from "@/components/molecules/product-description/p
 export { TotalPriceCard } from "@/components/molecules/total-price-card/total-price-card";
 export { FormBuilder } from "@/components/molecules/form-builder/form-builder";
 export { BoxWithTitle } from "@/components/molecules/box-with-title/box-with-title";
+export { OrderStatusList } from "@/components/molecules/order-status-list/order-status-list";

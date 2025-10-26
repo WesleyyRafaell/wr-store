@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 
 const AUTH_TOKEN_COOKIE_KEY = "auth_token";
-const PROTECTED_PATHS = ["/checkout", "/payment"];
+const PROTECTED_PATHS = ["/checkout", "/payment", "/orderstatus"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

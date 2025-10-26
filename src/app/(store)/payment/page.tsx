@@ -3,7 +3,7 @@ import { RenderCondition } from "@/components/atoms";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { IoIosTimer } from "react-icons/io";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,11 @@ const Payment = () => {
   const searchParams = useSearchParams();
 
   const paymentType = searchParams.get("payment_type");
-  console.log(`paymentType`, paymentType);
+
+  const redirectPage = (typePayment: string) => {
+    redirect(`/orderstatus?payment_type=${typePayment}`);
+  };
+
   return (
     <div className="pt-7 flex flex-col items-center gap-7">
       <Card className="w-2xl">
@@ -44,6 +48,9 @@ const Payment = () => {
                 Copiar linha digitável
               </Button>
             </div>
+            <div className="flex justify-center pt-7" onClick={() => redirectPage("ticket")}>
+              <Button>Realizei o pagamento</Button>
+            </div>
           </div>
         </Card>
       </RenderCondition>
@@ -73,6 +80,9 @@ const Payment = () => {
               <Button onClick={() => toast.success("Copiado com sucesso!")} className="mt-3">
                 Copiar código
               </Button>
+            </div>
+            <div className="flex justify-center pt-7" onClick={() => redirectPage("pix")}>
+              <Button>Realizei o pagamento</Button>
             </div>
           </div>
         </Card>
