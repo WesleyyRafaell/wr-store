@@ -4,3 +4,5 @@ export { Product } from "@/components/molecules/product/product";
 export { NumberStepper } from "@/components/molecules/number-stepper/number-stepper";
 export { ProductDescription } from "@/components/molecules/product-description/product-description";
 export { TotalPriceCard } from "@/components/molecules/total-price-card/total-price-card";
+export { FormBuilder } from "@/components/molecules/form-builder/form-builder";
+export { BoxWithTitle } from "@/components/molecules/box-with-title/box-with-title";
