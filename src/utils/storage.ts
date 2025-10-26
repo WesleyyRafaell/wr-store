@@ -14,9 +14,13 @@ export const saveUser = ({ name, email, password }: UserModel) => {
 };
 
 export const getUser = () => {
-  const data = localStorage.getItem(USER_DATA_KEY);
+  if (typeof window !== "undefined") {
+    const data = localStorage.getItem(USER_DATA_KEY);
 
-  return data ? JSON.parse(data) : null;
+    return data ? JSON.parse(data) : null;
+  }
+
+  return null;
 };
 
 export const saveAuthToken = (token: string) => {
