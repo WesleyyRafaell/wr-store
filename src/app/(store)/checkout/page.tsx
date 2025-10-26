@@ -8,12 +8,15 @@ import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RenderCondition } from "@/components/atoms";
 import { Controller, useForm } from "react-hook-form";
 import { checkoutSchema, checkoutTypeSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BoxWithTitle, FormBuilder, TotalPriceCard } from "@/components/molecules";
+import { redirect } from "next/navigation";
+import { isObjectNotEmpty } from "@/utils/object";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const user = getUser();
@@ -57,7 +60,15 @@ const Checkout = () => {
   const onSubmit = (data: checkoutTypeSchema) => {
     console.log("data:", data);
     // realizar manipulação com dados coletados aqui
+
+    redirect(`/payment?payment_type=${watch("paymentMethod")}`);
   };
+
+  useEffect(() => {
+    if (isObjectNotEmpty(errors)) {
+      toast.error("Existem erros a serem corrigidos");
+    }
+  }, [errors]);
 
   return (
     <div className="pt-7">
