@@ -54,7 +54,7 @@ Certifique-se de ter o **Git** e o **Node.js** (com **Yarn** instalado) em sua m
 
 | Tela Inicial |
 | :----------: | 
-| ![](public/home.png)
+| ![](/public/home.png)
 
 
 ## 🤝 Contribuidor
